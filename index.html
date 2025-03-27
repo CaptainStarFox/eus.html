@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate United Studios - Elevating Brands, Uniting Creativity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #1E1E1E;
+            --text-color: #FFFFFF;
+        }
+
+        /* Advanced Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(30,30,30,0.9);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary-color), #FFA500);
+            border-radius: 10px;
+        }
+
+        /* Cursor Custom Style */
+        body {
+            cursor: none;
+        }
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease, background-color 0.1s ease;
+        }
+        #custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(2);
+            background-color: rgba(255,215,0,0.2);
+        }
+
+        /* Advanced Reveal Animations */
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Glitch Text Effect */
+        .glitch-text {
+            position: relative;
+            color: var(--primary-color);
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 red;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 blue;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(61px, 9999px, 52px, 0);
+                transform: skew(0.87deg);
+            }
+            5% {
+                clip: rect(33px, 9999px, 14px, 0);
+                transform: skew(0.29deg);
+            }
+            10% {
+                clip: rect(85px, 9999px, 66px, 0);
+                transform: skew(0.91deg);
+            }
+            15% {
+                clip: rect(55px, 9999px, 29px, 0);
+                transform: skew(0.85deg);
+            }
+            20% {
+                clip: rect(91px, 9999px, 52px, 0);
+                transform: skew(0.90deg);
+            }
+            25% {
+                clip: rect(74px, 9999px, 72px, 0);
+                transform: skew(0.76deg);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(29px, 9999px, 61px, 0);
+                transform: skew(0.37deg);
+            }
+            5% {
+                clip: rect(50px, 9999px, 44px, 0);
+                transform: skew(0.53deg);
+            }
+            10% {
+                clip: rect(15px, 9999px, 85px, 0);
+                transform: skew(0.63deg);
+            }
+            15% {
+                clip: rect(36px, 9999px, 29px, 0);
+                transform: skew(0.54deg);
+            }
+            20% {
+                clip: rect(66px, 9999px, 91px, 0);
+                transform: skew(0.70deg);
+            }
+            25% {
+                clip: rect(47px, 9999px, 74px, 0);
+                transform: skew(0.46deg);
+            }
+        }
+
+        /* Hover Effects */
+        .interactive-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            perspective: 1000px;
+        }
+        .interactive-card:hover {
+            transform: rotateY(10deg) translateZ(50px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(255,215,0,0.22);
+        }
+
+        /* Dark Mode Toggle */
+        #dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: black;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        #dark-mode-toggle:hover {
+            transform: rotate(360deg);
+        }
+
+        /* Form Validation Styles */
+        .valid {
+            border-color: green;
+        }
+        .invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Dark Mode Toggle -->
+    <div id="dark-mode-toggle" title="Toggle Dark/Light Mode">
+        <i class="fas fa-adjust"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center text-center reveal parallax-layer" data-speed="5">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4" data-text="Elevate United Studios">Elevate United Studios</h1>
+            <p class="text-xl md:text-2xl mb-8">Elevating Brands, Uniting Creativity</p>
+            <a href="#contact" class="bg-primary text-black px-6 py-3 rounded-full hover:bg-opacity-80 transition">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-secondary reveal">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-black border border-primary p-6 text-center interactive-card">
+                    <i class="fas fa-paint-brush text-4xl mb-4"></i>
+                    <h3 class="text-2xl mb-4">Branding</h3>
+                    <p>Creating unique brand identities that stand out in the market.</p>
+                </div>
+                <div class="bg-black border border-primary p-6 text-center interactive-card">
+                    <i class="fas fa-desktop text-4xl mb-4"></i>
+                    <h3 class="text-2xl mb-4">Design</h3>
+                    <p>Crafting stunning visual experiences across digital platforms.</p>
+                </div>
+                <div class="bg-black border border-primary p-6 text-center interactive-card">
+                    <i class="fas fa-bullhorn text-4xl mb-4"></i>
+                    <h3 class="text-2xl mb-4">Marketing</h3>
+                    <p>Strategic campaigns that drive engagement and growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 reveal">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Contact Us</h2>
+            <form class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <input type="text" name="name" placeholder="Your Name" class="w-full p-3 bg-secondary rounded" required>
+                </div>
+                <div class="mb-4">
+                    <input type="email" name="email" placeholder="Your Email" class="w-full p-3 bg-secondary rounded" required>
+                </div>
+                <div class="mb-4">
+                    <textarea name="message" placeholder="Your Message" class="w-full p-3 bg-secondary rounded" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-primary text-black py-3 rounded-full hover:bg-opacity-80 transition">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script>
+        // Advanced Cursor Interaction
+        const customCursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+        });
+
+        // Cursor Hover Effects
+        document.querySelectorAll('a, button, .interactive-card').forEach(el => {
+            el.addEventListener('mouseenter', () => customCursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => customCursor.classList.remove('hover'));
+        });
+
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate sections on scroll
+        gsap.utils.toArray('.reveal').forEach(section => {
+            gsap.from(section, {
+                opacity: 0,
+                y: 100,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Toggle color scheme
+            if (document.body.classList.contains('dark-mode')) {
+                document.documentElement.style.setProperty('--primary-color', '#00BFFF');
+                document.documentElement.style.setProperty('--secondary-color', '#FFFFFF');
+                document.documentElement.style.setProperty('--text-color', '#000000');
+            } else {
+                document.documentElement.style.setProperty('--primary-color', '#FFD700');
+                document.documentElement.style.setProperty('--secondary-color', '#1E1E1E');
+                document.documentElement.style.setProperty('--text-color', '#FFFFFF');
+            }
+        });
+
+        // Glitch Text Effect
+        function applyGlitchEffect() {
+            const headings = document.querySelectorAll('h1, h2, h3');
+            headings.forEach(heading => {
+                heading.classList.add('glitch-text');
+                heading.setAttribute('data-text', heading.textContent);
+            });
+        }
+        applyGlitchEffect();
+
+        // Interactive 3D Parallax Effect
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            document.querySelectorAll('.parallax-layer').forEach(layer => {
+                const speed = layer.getAttribute('data-speed');
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                
+                layer.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Advanced Form Validation with Real-time Feedback
+        const contactForm = document.querySelector('form');
+        const formFields = contactForm.querySelectorAll('input, textarea');
+
+        formFields.forEach(field => {
+            field.addEventListener('input', () => {
+                if (field.value.trim() !== '') {
+                    field.classList.add('valid');
+                    field.classList.remove('invalid');
+                } else {
+                    field.classList.add('invalid');
+                    field.classList.remove('valid');
+                }
+            });
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+
+            formFields.forEach(field => {
+                if (field.value.trim() === '') {
+                    field.classList.add('invalid');
+                    isValid = false;
+                }
+            });
+
+            if (isValid) {
+                // Simulate form submission
+                gsap.to(contactForm, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5,
+                    onComplete: () => {
+                        contactForm.innerHTML = `
+                            <div class="text-center text-green-500">
+                                <h3>Message Sent Successfully!</h3>
+                                <p>We'll get back to you soon.</p>
+                            </div>
+                        `;
+                        gsap.to(contactForm, { opacity: 1, y: 0, duration: 0.5 });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
